@@ -19,3 +19,46 @@
     src: "{{ WILDFLY_FULL_DIR }}"
     dest: "{{ WILDFLY_DIR }}"
     state: link
+
+- name: create wildfly user
+  user:
+    name: "{{ WILDFLY_USER }}"
+    password: "{{ WILDFLY_PASSWORD }}"
+
+- name: create launch.sh for service configuration
+  template:
+    src: launch.sh.j2
+    dest: "{{ WILDFLY_DIR }}/bin/launch.sh"
+    owner: root
+    group: root
+    mode: 0744
+    
+- name: create wildfly service configuration file
+  template:
+    src: wildfly.conf.j2
+    dest: "{{ WILDFLY_SERVICE_CONF }}"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: create wildfly service file
+  command: "cp {{ WILDFLY_DIR }}/docs/contrib/scripts/systemd/wildfly.service {{ WILDFLY_SERVICE_FILE }}"
+
+- name: change wildfly service configuration file reference - EnvironmentFile
+  replace:
+    path: "{{ WILDFLY_SERVICE_FILE }}"
+    regexp: "EnvironmentFile=.*"
+    replace: "EnvironmentFile={{ WILDFLY_SERVICE_CONF }}"
+
+- name: change wildfly service configuration file reference - User
+  replace:
+    path: "{{ WILDFLY_SERVICE_FILE }}"
+    regexp: "User=.*"
+    replace: "User=root"
+
+- name: Start and Enable WildFly Service
+  systemd:
+    state: started
+    name: "{{ WILDFLY_SERVICE }}"
+    daemon_reload: yes
+    enabled: yes

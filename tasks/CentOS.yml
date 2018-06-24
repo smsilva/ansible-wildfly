@@ -4,3 +4,8 @@
     echo "WILDFLY_FILENAME={{ WILDFLY_FILENAME }}" && \
     echo "WILDFLY_ARCHIVE_NAME={{ WILDFLY_ARCHIVE_NAME }}" && \
     echo "WILDFLY_DOWNLOAD_ADDRESS={{ WILDFLY_DOWNLOAD_ADDRESS }}"
+
+- name: install OpenJDK
+  yum:
+    name: "{{ JAVA_OPEN_JDK }}"
+    state: present

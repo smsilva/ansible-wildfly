@@ -1,4 +1,6 @@
 ---
+JAVA_OPEN_JDK: java-1.8.0-openjdk.x86_64
+
 WILDFLY_VERSION: "13.0.0.Final"
 WILDFLY_FILENAME: "wildfly-{{ WILDFLY_VERSION }}"
 WILDFLY_ARCHIVE_NAME: "{{ WILDFLY_FILENAME }}.tar.gz"
@@ -10,8 +12,15 @@ WILDFLY_FULL_DIR: "{{ WILDFLY_INSTALL_DIR }}/{{ WILDFLY_FILENAME }}"
 WILDFLY_DIR: "{{ WILDFLY_INSTALL_DIR }}/wildfly"
 
 WILDFLY_USER: "wildfly"
+# python -c 'import crypt; print crypt.crypt("DoNotUserThisPassword", "$1$SomeSalt$")'
+WILDFLY_PASSWORD: "$1$SomeSalt$fR.DNjvgkape1jQ9V99cV1"
+
 WILDFLY_SERVICE: "wildfly"
+WILDFLY_SERVICE_CONF: "/etc/default/{{ WILDFLY_SERVICE }}"
+WILDFLY_SERVICE_FILE: "/etc/systemd/system/{{ WILDFLY_SERVICE }}.service"
+
 WILDFLY_MODE: "standalone"
 
 WILDFLY_STARTUP_TIMEOUT: 240
 WILDFLY_SHUTDOWN_TIMEOUT: 30
+WILDFLY_BIND: "0.0.0.0"
