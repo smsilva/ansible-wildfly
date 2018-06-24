@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Installs a WildFly Instance with default configuration.
+Install a WildFly Instance with default configuration.
 
 Requirements
 ------------
