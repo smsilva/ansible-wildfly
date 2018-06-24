@@ -1,0 +1,6 @@
+- name: echo task only
+  shell: >
+    echo "WILDFLY_VERSION={{ WILDFLY_VERSION }}" && \
+    echo "WILDFLY_FILENAME={{ WILDFLY_FILENAME }}" && \
+    echo "WILDFLY_ARCHIVE_NAME={{ WILDFLY_ARCHIVE_NAME }}" && \
+    echo "WILDFLY_DOWNLOAD_ADDRESS={{ WILDFLY_DOWNLOAD_ADDRESS }}"

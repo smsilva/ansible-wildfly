@@ -1,0 +1,21 @@
+---
+- name: Import Specific Distribution Tasks
+  import_tasks: "CentOS.yml"
+  when: ansible_distribution == "CentOS"
+
+- name: Download WildFly
+  get_url:
+    url: "{{ WILDFLY_DOWNLOAD_ADDRESS }}"
+    dest: "/tmp/{{ WILDFLY_ARCHIVE_NAME }}"
+
+- name: Extract WildFly Folder
+  unarchive:
+    src: "/tmp/{{ WILDFLY_ARCHIVE_NAME }}"
+    dest: "{{ WILDFLY_INSTALL_DIR }}"
+    remote_src: yes
+
+- name: create a symbolic link
+  file:
+    src: "{{ WILDFLY_FULL_DIR }}"
+    dest: "{{ WILDFLY_DIR }}"
+    state: link
