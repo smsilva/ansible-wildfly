@@ -1,2 +1,2 @@
-[wildfly]
-192.168.15.27
+[production]
+wildfly ansible_host=192.168.1.109

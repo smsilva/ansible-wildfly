@@ -3,4 +3,4 @@
   name: Install WildFly Application Server
 
   roles:
-    - smsilva.ansible-wildfly
+  - smsilva.ansible_wildfly
